@@ -225,6 +225,62 @@ public class test {
 
 
     }
+    @Test
+    public void test16(){
+      //  System.out.println(Math.E);
+      //  System.out.println(Math.random());
+      //  System.out.println(Math.PI);
+        String str1 = new String();
+        str1 = "a";
+        str1.toUpperCase();
+        CharSequence cs = " ";
+        String str2="java是一门面向对象语言";
+        char[] hsbc = new char[10];
+        str2.getChars(1,6,hsbc,1);
+        System.out.println(hsbc);
+        String str3="b";
+        System.out.println(str1.compareTo(str3));
+        System.out.println(str1.equals(str3));
+        int hashCode = str2.hashCode();
+        System.out.println(hashCode);
+
+    }
+
+    @Test
+    public void test17(){
+        char[] data ={'t','h','i','s'};
+        String str = new String();
+        System.out.println(str.copyValueOf(data));
+        StringBuffer buffer = new StringBuffer(str);
+
+
+
+    }
+    @Test
+    public void test18(){
+        Animal animal = new Dog();
+        animal.walk();
+        Boolean boo = animal instanceof Dog;
+        System.out.println(boo);
+     //   animal.eat();
+       Dog dog = (Dog)animal;
+       dog.eat();
+       dog.walk();
+    }
+    @Test
+    public void test19(){
+        Thread thread = Thread.currentThread();
+        System.out.println(thread.getId());
+        System.out.println(thread.getName());
+    }
+
+    @Test
+    public void test20(){
+        AA a = new AA();
+        Thread t = new Thread(a);
+        t.start();
+    }
+
 
 
 
