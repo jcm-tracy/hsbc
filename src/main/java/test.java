@@ -1,12 +1,16 @@
 import org.junit.Test;
 
+import javax.swing.*;
+import java.awt.*;
+import java.io.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Scanner;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.*;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+
+import static jdk.nashorn.internal.runtime.regexp.joni.Syntax.Java;
 
 public class test {
 
@@ -279,6 +283,132 @@ public class test {
         AA a = new AA();
         Thread t = new Thread(a);
         t.start();
+    }
+    @Test
+    public void test21(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("请输入两个非负整数,第一个：");
+        int p =sc.nextInt();
+        System.out.println("第二个:");
+        int q =sc.nextInt();
+        System.out.println(p+"和"+q+"的最大公约数为"+gcd(p,q));
+    }
+
+    private static int gcd(int p, int q) {
+        if(q==0) return p;
+        int r = p % q;
+        return gcd(q,r);
+    }
+
+    @Test
+    public void test22(){
+        Bank bank = new Bank();
+        Thread t1 = new Thread(){
+            public void run(){
+                bank.withdraw(15000);
+            }
+        };
+        t1.start();
+        Thread t2 = new Thread(){
+          public void run(){
+              bank.deposit(500);
+          }
+        };
+        t2.start();
+    }
+
+    @Test
+    public void test23(){
+        try {
+            FileOutputStream obj = new FileOutputStream("D:\\rfr\\Java\\ch22.txt");
+//            obj.write(70);
+//            obj.close();
+            String str  = "每天送煤都会送到窗台地下，有人没人都码放整齐，送一被子煤也受人敬重";
+            byte[] bytes = str.getBytes();
+            obj.write(bytes);
+            obj.close();
+            System.out.println("输出成功！");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+    }
+
+    @Test
+    public void test24(){
+        System.out.println(readFileContext());
+    }
+
+    public static String readFileContext() {
+       /* try {
+            FileInputStream obj = new FileInputStream("D:\\rfr\\Java\\ch22.txt");
+            int read = obj.read();
+            System.out.println((char)read);
+
+            obj.close();
+            System.out.println("读取成功！");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+        File file = new File("D:\\rfr\\Java\\ch22.txt");
+        BufferedReader reader = null;
+        StringBuffer sbf = new StringBuffer();
+        try {
+            reader = new BufferedReader(new FileReader(file));
+            String tempStr;
+            while ((tempStr = reader.readLine()) != null) {
+                sbf.append(tempStr);
+            }
+            reader.close();
+            return sbf.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+           if(reader != null){
+               try {
+                   reader.close();
+               } catch (IOException e) {
+                   e.printStackTrace();
+               }
+
+           }
+        }
+        return sbf.toString();
+       /* System.err.println("ssss");
+        try {
+            System.in.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+
+
+    }
+
+    @Test
+    public void test25(){
+        JFrame frame = new JFrame("第一个窗口");
+        frame.setVisible(true);
+        frame.setSize(200,200);
+    }
+
+    @Test
+    public void test26(){
+        try {
+            /*InetAddress ip = InetAddress.getLocalHost();
+            System.out.println(ip.getHostName());
+            System.out.println(ip.getHostAddress());
+            System.out.println(ip);*/
+            InetAddress ip = InetAddress.getByName("www.baidu.com");
+            System.out.println(ip);
+
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+
     }
 
 
